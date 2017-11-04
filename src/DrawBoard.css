@@ -1,0 +1,30 @@
+.PencilButton{
+    -fx-background-color: white;
+}
+.BackGround{
+    -fx-background-image: url("img/bg.jpg");
+}
+
+.Logo{
+    -fx-background-image: url("img/java.png");
+}
+
+.button1{
+
+    -fx-text-fill: white;
+
+    -fx-background-color: gray;
+
+    -fx-border-radius: 20;
+
+    -fx-background-radius: 20;
+
+    -fx-padding: 5;
+
+}
+
+.button2{
+    -fx-background-image: url("img/background.jpg");
+
+    -fx-text-fill: #006464;
+}

@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.embed.swing.SwingNode?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" stylesheets="@DrawBoard.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DrawBoardController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="492.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="980.0" minHeight="10.0" prefHeight="970.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+         <top>
+            <ToolBar prefHeight="213.0" prefWidth="1200.0" styleClass="BackGround" BorderPane.alignment="CENTER">
+               <items>
+                  <GridPane prefHeight="98.0" prefWidth="1184.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="54.0" minWidth="10.0" prefWidth="40.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="173.0" minWidth="154.0" prefWidth="168.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1054.0" minWidth="5.0" prefWidth="26.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="159.0" prefWidth="195.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="43.0" minWidth="1.0" prefWidth="20.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="344.0" minWidth="344.0" prefWidth="344.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="16.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="254.0" minWidth="254.0" prefWidth="254.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="122.0" minWidth="122.0" prefWidth="122.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <GridPane GridPane.columnIndex="3">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER" prefHeight="24.0" prefWidth="237.0" text="通用" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <GridPane GridPane.rowIndex="1">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <ColorPicker fx:id="colorPicker" onAction="#setColor" styleClass="button2" GridPane.columnIndex="1">
+                                       <effect>
+                                          <ColorAdjust>
+                                             <input>
+                                                <Lighting>
+                                                   <bumpInput>
+                                                      <Shadow />
+                                                   </bumpInput>
+                                                   <light>
+                                                      <Light.Distant />
+                                                   </light>
+                                                </Lighting>
+                                             </input>
+                                          </ColorAdjust>
+                                       </effect></ColorPicker>
+                                    <Label alignment="CENTER" prefHeight="20.0" prefWidth="104.0" text="线条颜色：" textFill="WHITE" />
+                                    <Label alignment="CENTER" prefHeight="20.0" prefWidth="118.0" text="线条粗细：" textFill="WHITE" GridPane.rowIndex="1" />
+                                    <ComboBox fx:id="headSize" editable="true" onAction="#setPencilSize" prefHeight="30.0" prefWidth="120.0" styleClass="button2" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <effect>
+                                          <Lighting>
+                                             <bumpInput>
+                                                <Shadow />
+                                             </bumpInput>
+                                             <light>
+                                                <Light.Distant />
+                                             </light>
+                                          </Lighting>
+                                       </effect></ComboBox>
+                                    <Label alignment="CENTER" prefHeight="20.0" prefWidth="120.0" text="文本大小：" textFill="WHITE" GridPane.rowIndex="2" />
+                                    <ComboBox fx:id="fontSize" editable="true" onAction="#setFontSize" prefWidth="150.0" styleClass="button2" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <effect>
+                                          <Lighting>
+                                             <bumpInput>
+                                                <Shadow />
+                                             </bumpInput>
+                                             <light>
+                                                <Light.Distant />
+                                             </light>
+                                          </Lighting>
+                                       </effect></ComboBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                        <GridPane>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
+                           <children>
+                              <GridPane>
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="115.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="eraser" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#switchPencilType" onMouseEntered="#EraserMessage" onMouseExited="#ClearMessage" prefHeight="70.0" prefWidth="31.0" styleClass="button1" text="橡皮" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="selectPencil" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#switchPencilType" prefHeight="69.0" prefWidth="31.0" style="-fx-background-color: greenyellow;" styleClass="button1" text="选择" textAlignment="CENTER" wrapText="true" GridPane.valignment="BOTTOM">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                        <GridPane fx:id="rectPreferencePane" prefHeight="199.0" prefWidth="245.0" visible="false" GridPane.columnIndex="5">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" valignment="CENTER" />
+                          </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER" prefHeight="24.0" prefWidth="293.0" text="矩形偏好" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <GridPane prefHeight="151.0" prefWidth="255.0" GridPane.rowIndex="1">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="147.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="142.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <CheckBox alignment="CENTER" mnemonicParsing="false" onAction="#SetRectFill" prefHeight="21.0" prefWidth="68.0" styleClass="button1" text="填充" textFill="WHITE" />
+                                    <ColorPicker fx:id="rectFillColorPicker" disable="true" onAction="#SetRectFillColor" prefHeight="30.0" prefWidth="99.0" styleClass="button2" GridPane.rowIndex="1" />
+                                    <CheckBox mnemonicParsing="false" onAction="#SetRectGradient" prefHeight="31.0" prefWidth="184.0" styleClass="button1" text="线性渐变到颜色" GridPane.rowIndex="2" />
+                                    <ColorPicker fx:id="rectGradientColorPicker" disable="true" onAction="#SetRectGradientColor" prefHeight="30.0" prefWidth="99.0" styleClass="button2" GridPane.rowIndex="3" />
+                                    <CheckBox mnemonicParsing="false" onAction="#SetRectRound" prefHeight="21.0" prefWidth="70.0" styleClass="button1" text="圆角" textFill="WHITE" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="rectArcRadiusComboBox" disable="true" onAction="#SetRectArcRadius" prefHeight="30.0" prefWidth="114.0" promptText="圆角半径" styleClass="button2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                        <GridPane fx:id="ovelPreferencePane" visible="false" GridPane.columnIndex="5">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="152.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER" prefHeight="20.0" prefWidth="319.0" text="圆形偏好" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <GridPane prefHeight="152.0" prefWidth="268.0" GridPane.rowIndex="1">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="166.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="171.0" minWidth="10.0" prefWidth="91.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <CheckBox mnemonicParsing="false" onAction="#SetOvelFill" prefHeight="31.0" prefWidth="92.0" styleClass="button1" text="  填充" textFill="WHITE" />
+                                    <ColorPicker fx:id="ovelFillColorPicker" disable="true" onAction="#SetOvelFillColor" styleClass="button2" GridPane.rowIndex="1" />
+                                    <CheckBox mnemonicParsing="false" onAction="#SetOvelGradient" styleClass="button1" text="径向渐变到颜色" textFill="WHITE" GridPane.rowIndex="2" />
+                                    <ColorPicker fx:id="ovelGradientColorPicker" disable="true" onAction="#SetOvelGradientColor" styleClass="button2" GridPane.rowIndex="3" />
+                                    <CheckBox mnemonicParsing="false" onAction="#SetOvelShadow" prefHeight="31.0" prefWidth="93.0" styleClass="button1" text="  阴影" textFill="WHITE" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="ovelShadowWidthComboBox" disable="true" onAction="#SetOvelShadowWidth" prefWidth="150.0" promptText="阴影宽度" styleClass="button2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <ColorPicker fx:id="ovelShadowColorPicker" disable="true" onAction="#SetOvelShadowColor" prefHeight="30.0" prefWidth="145.0" styleClass="button2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                        <GridPane fx:id="textPreferencePane" visible="false" GridPane.columnIndex="5">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="94.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="156.0" minHeight="10.0" prefHeight="155.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER" prefHeight="24.0" prefWidth="344.0" text="文本偏好" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <GridPane prefHeight="160.0" prefWidth="343.0" GridPane.rowIndex="1">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="216.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="92.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label prefHeight="20.0" prefWidth="73.0" text="字体：" textFill="WHITE" />
+                                    <ComboBox fx:id="textFontComboBox" onAction="#SetTextFont" prefHeight="30.0" prefWidth="197.0" promptText="字体选择" styleClass="button2" GridPane.rowIndex="1" />
+                                    <CheckBox fx:id="textBold" mnemonicParsing="false" onAction="#SetTextBold" styleClass="button1" text="粗体" textFill="WHITE" GridPane.rowIndex="3" />
+                                    <CheckBox fx:id="textItalic" mnemonicParsing="false" onAction="#SetTextItalic" styleClass="button1" text="斜体" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets right="50.0" />
+                                       </GridPane.margin></CheckBox>
+                                    <RadioButton fx:id="textFuzzy" mnemonicParsing="false" onAction="#SetTextFuzzy" prefHeight="23.0" prefWidth="67.0" styleClass="button1" text="模糊" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="textEffect" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="textReflect" mnemonicParsing="false" onAction="#SetTextReflect" styleClass="button1" text="文字倒影" textFill="WHITE" toggleGroup="$textEffect" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <RadioButton fx:id="textOutsideShadow" mnemonicParsing="false" onAction="#SetTextOutsideShadow" styleClass="button1" text="外部阴影" textFill="WHITE" toggleGroup="$textEffect" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <RadioButton fx:id="textInsideShadow" mnemonicParsing="false" onAction="#SetTextInsideShadow" styleClass="button1" text="内部阴影" textFill="WHITE" toggleGroup="$textEffect" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <RadioButton fx:id="textNoEffect" mnemonicParsing="false" onAction="#SetTextNoEffect" selected="true" styleClass="button1" text="无特效" textFill="WHITE" toggleGroup="$textEffect" GridPane.columnIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                        <GridPane GridPane.columnIndex="7">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="94.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="162.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <GridPane>
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="109.0" minWidth="10.0" prefWidth="108.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="79.0" minWidth="10.0" prefWidth="48.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="10.0" prefWidth="102.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#AddLayer" prefHeight="16.0" prefWidth="51.0" styleClass="button1" text="添加" wrapText="true">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect></Button>
+                                    <Label alignment="CENTER" prefHeight="20.0" prefWidth="378.0" text="图层" textFill="WHITE" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#DeleteLayer" onMouseEntered="#DeleteLayerMessage" onMouseExited="#ClearMessage" prefHeight="16.0" prefWidth="51.0" styleClass="button1" text="删除" wrapText="true" GridPane.halignment="RIGHT">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect></Button>
+                                    <Button mnemonicParsing="false" onAction="#ShowAllLayers" prefHeight="30.0" prefWidth="81.0" styleClass="button1" text="显示全部" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect></Button>
+                                 </children>
+                              </GridPane>
+                              <ListView fx:id="layerList" onMouseClicked="#SelectLayer" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <effect>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
+                              </ListView>
+                           </children>
+                        </GridPane>
+                        <GridPane prefHeight="106.0" prefWidth="121.0" GridPane.columnIndex="8">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="55.0" minWidth="10.0" prefWidth="13.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="108.0" minWidth="10.0" prefWidth="108.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="155.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <ColorPicker fx:id="layerBackgroundColor" onAction="#SetLayerBackgroundColor" styleClass="button2" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                 <effect>
+                                    <Lighting surfaceScale="2.11">
+                                       <bumpInput>
+                                          <Shadow color="WHITE" />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect></ColorPicker>
+                              <Label text="当前图层颜色：" textFill="WHITE" GridPane.columnIndex="1" />
+                           </children>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </GridPane>
+                        <GridPane GridPane.columnIndex="1">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <GridPane GridPane.rowIndex="1">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="image" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#AddImage" prefHeight="52.0" prefWidth="81.0" styleClass="button1" text="图片">
+                                       <effect>
+                                          <DropShadow radius="10.7775" spread="0.21" width="24.11" />
+                                       </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                  <Button fx:id="pencil" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#switchPencilType" prefHeight="52.0" prefWidth="91.0" styleClass="button1" text="自由画图" GridPane.columnIndex="1">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="rectanglePencil" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#switchPencilType" prefHeight="52.0" prefWidth="81.0" styleClass="button1" text="矩形" GridPane.rowIndex="1">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="circlePencil" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#switchPencilType" prefHeight="52.0" prefWidth="93.0" styleClass="button1" text="圆" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </Button>
+                                    <Button fx:id="linePencil" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#switchPencilType" prefHeight="51.0" prefWidth="80.0" styleClass="button1" text="直线" GridPane.rowIndex="2">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="textPencil" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#switchPencilType" prefHeight="51.0" prefWidth="94.0" styleClass="button1" text="文本" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="198.0" text="工具" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </GridPane>
+               </items>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <effect>
+                  <InnerShadow color="WHITE" height="39.66" radius="9.415" width="0.0" />
+               </effect>
+            </ToolBar>
+         </top>
+         <center>
+            <Pane fx:id="DrawBoardPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+               <children>
+                  <Canvas fx:id="drawBoard" height="720.0" onMouseClicked="#SelectGraph" onMouseDragged="#DrawOver" onMousePressed="#DrawDetected" onMouseReleased="#DrawDone" scaleZ="2.0" width="1200.0" />
+                  <Canvas fx:id="draft" height="720.0" onMouseClicked="#EditExit" onMouseDragged="#EditOver" onMouseMoved="#CursorChange" onMousePressed="#EditDetected" onMouseReleased="#EditDone" width="1200.0" />
+                  <GridPane fx:id="inputPane" prefHeight="30.0" prefWidth="1200.0" visible="false">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1152.0" minWidth="10.0" prefWidth="1149.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="494.0" minWidth="10.0" prefWidth="51.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="textField" prefHeight="30.0" prefWidth="1001.0" />
+                        <Button fx:id="closeInputPaneButton" mnemonicParsing="false" onAction="#CloseInputPane" text="关闭" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
+               </children>
+            </Pane>
+         </center>
+         <bottom>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0" styleClass="BackGround" BorderPane.alignment="CENTER">
+              <buttons>
+                  <GridPane prefHeight="40.0" prefWidth="1341.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="203.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="818.0" minWidth="10.0" prefWidth="742.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="674.0" minWidth="10.0" prefWidth="99.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="674.0" minWidth="10.0" prefWidth="55.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="719.0" minWidth="10.0" prefWidth="95.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="moveUpButton" mnemonicParsing="false" onAction="#MoveUp" onMouseEntered="#MoveUpMessage" onMouseExited="#ClearMessage" styleClass="button1" text="移到最上层">
+                           <effect>
+                              <DropShadow />
+                           </effect></Button>
+                        <Button fx:id="moveDownButton" mnemonicParsing="false" onAction="#MoveDown" onMouseEntered="#MoveDownMessage" onMouseExited="#ClearMessage" prefHeight="30.0" prefWidth="96.0" styleClass="button1" text="移到最下层" GridPane.halignment="RIGHT">
+                           <effect>
+                              <DropShadow />
+                           </effect></Button>
+                        <Button fx:id="undoButton" mnemonicParsing="false" onAction="#Undo" styleClass="button1" text="撤销" GridPane.columnIndex="2">
+                           <effect>
+                              <DropShadow />
+                           </effect></Button>
+                        <Button fx:id="redoButton" mnemonicParsing="false" onAction="#Redo" styleClass="button1" text="重做" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                           <effect>
+                              <DropShadow />
+                           </effect></Button>
+                        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#DeleteGraph" styleClass="button1" text="删除" GridPane.columnIndex="4">
+                           <effect>
+                              <DropShadow />
+                           </effect></Button>
+                      <Button fx:id="clearButton" mnemonicParsing="false" onAction="#ClearDrawBoard" styleClass="button1" text="清空" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+                           <effect>
+                              <DropShadow />
+                           </effect></Button>
+                        <Label fx:id="message" alignment="CENTER" prefHeight="20.0" prefWidth="749.0" textFill="WHITE" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
+              </buttons>
+               <effect>
+                  <DropShadow height="39.66" radius="14.665" />
+               </effect>
+            </ButtonBar>
+         </bottom>
+      </BorderPane>
+      <SwingNode />
+      <MenuBar prefHeight="21.0" prefWidth="1200.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="文件">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#NewProject" text="新建" />
+                  <MenuItem mnemonicParsing="false" onAction="#Save" text="保存">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#SaveAs" text="另存为">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#Open" text="打开">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#ExportCurrentLayer" text="导出当前图层" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="编辑">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#Undo" text="撤销">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#Redo" text="重做">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Y" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#CopySelectedGraph" text="复制当前选中图形">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#CutSelectedGraph" text="剪切当前选中图形">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#PasteGraph" text="粘贴到当前图层">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+              <MenuItem mnemonicParsing="false" onAction="#DeleteGraph" text="删除当前选中图形">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="DELETE" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#ClearDrawBoard" text="清空画板">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="DELETE" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="帮助">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#ShowAuthor" text="联系作者">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="I" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</GridPane>
