@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -24,6 +25,7 @@ public class DrawBoard extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DrawBoard.fxml"));
         Parent root = loader.load();
+        primaryStage.getIcons().add(new Image("img/icon.png"));
         primaryStage.setTitle("DrawBoard");
         DrawBoardController controller = loader.getController();
         controller.setStage(primaryStage);
