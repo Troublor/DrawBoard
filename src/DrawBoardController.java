@@ -46,6 +46,7 @@ public class DrawBoardController implements Initializable{
     private ToolKit toolKit, globalToolKit;
     private GraphicsContext gc, draft_gc;
     private Graph selectedGraph, newGraph;
+    private Point newGraph_startPoint;
     private boolean isDragged;
     private boolean hasEdited;
     private int editMotion;
@@ -650,6 +651,7 @@ public class DrawBoardController implements Initializable{
             } else if (tool.getPencilType() == Tool.TEXTPENCIL) {
                 newGraph = new Text(event.getX(), event.getY(), event.getX(), event.getY(), "");
             }
+            newGraph_startPoint = new Point(event.getX(), event.getY());
             newGraph.setToolKit(toolKit);
         }
 
@@ -713,7 +715,48 @@ public class DrawBoardController implements Initializable{
                 }
             } else if (tool.getPencilType() != Tool.SELECTPENCIL) {
                 clearArea(draft);
-                newGraph.setRbPoint(event.getX(), event.getY());
+                //如果鼠标轨迹不是按照从左上到右下的顺序
+                //更新左上和右下点
+                Point newLtPoint,newRbPoint;
+                if (event.getX() < newGraph_startPoint.getX()) {
+                    if (event.getY() < newGraph_startPoint.getY()) {
+                        newLtPoint = new Point(event.getX(), event.getY());
+                        newRbPoint = new Point(newGraph_startPoint.getX(), newGraph_startPoint.getY());
+                        if (newGraph instanceof Line) {
+                            Line newLine = (Line) newGraph;
+                            newLine.setStartPoint(Line.LinePoint.RIGHT_BOTTOM);
+                            newLine.setEndPoint(Line.LinePoint.LEFT_TOP);
+                        }
+                    } else {
+                        newLtPoint = new Point(event.getX(), newGraph_startPoint.getY());
+                        newRbPoint = new Point(newGraph_startPoint.getX(), event.getY());
+                        if (newGraph instanceof Line) {
+                            Line newLine = (Line) newGraph;
+                            newLine.setStartPoint(Line.LinePoint.RIGHT_TOP);
+                            newLine.setEndPoint(Line.LinePoint.LEFT_BOTTOM);
+                        }
+                    }
+                } else {
+                    if (event.getY() < newGraph_startPoint.getY()) {
+                        newLtPoint = new Point(newGraph_startPoint.getX(), event.getY());
+                        newRbPoint = new Point(event.getX(), newGraph_startPoint.getY());
+                        if (newGraph instanceof Line) {
+                            Line newLine = (Line) newGraph;
+                            newLine.setStartPoint(Line.LinePoint.LEFT_BOTTOM);
+                            newLine.setEndPoint(Line.LinePoint.RIGHT_TOP);
+                        }
+                    } else {
+                        newLtPoint = newGraph_startPoint;
+                        newRbPoint = new Point(event.getX(), event.getY());
+                        if (newGraph instanceof Line) {
+                            Line newLine = (Line) newGraph;
+                            newLine.setStartPoint(Line.LinePoint.LEFT_TOP);
+                            newLine.setEndPoint(Line.LinePoint.RIGHT_BOTTOM);
+                        }
+                    }
+                }
+                newGraph.setLtPoint(newLtPoint.getX(), newLtPoint.getY());
+                newGraph.setRbPoint(newRbPoint.getX(), newRbPoint.getY());
                 if (tool.getPencilType() == Tool.TEXTPENCIL) {
                     newGraph.select(draft_gc);
                 }
